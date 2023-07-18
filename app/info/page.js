@@ -3,7 +3,7 @@ import exp from "constants";
 const Airtable = require('airtable');
 
 const base = new Airtable({
-    apiKey: "patEx17jm7cJGRM3n.f10a8a9dbfb25a6dc18caeb854badf730e9d6f99d7cafd6170e072c153180f26",
+    apiKey: process.env.AIRTABLE_API_KEY,
 }).base(process.env.AIRTABLE_BASE_ID);
 
 const table = base(process.env.AIRTABLE_TABLE_NAME);
@@ -21,11 +21,39 @@ const minifyRecord = record => {
     };
 };
 
+
 export default async function getPosts() {
     const records = await table.select({}).all();
     const minifiedRecords = await getMinifiedRecords(records);
 
-    console.log(minifiedRecords);
+    minifiedRecords?.map(post =>{
+        const options = {
+            method: 'POST',
+            headers: {
+                accept: 'application/json',
+                'content-type': 'application/json',
+                authorization: process.env.WEBFLOW_API_KYE
+            },
+            body: JSON.stringify({
+                fields: {
+                    slug: post.fields.Name,
+                    name: post.fields.Name,
+                    _archived: false,
+                    _draft: false,
+                    phonnumber: post.fields.PhoneNumber,
+                    'email-2': post.fields.Email,
+                    company: post.fields.Company,
+                    service: post.fields.Servise,
+                    budget: post.fields.budget
+                }
+            })
+        };
+
+        fetch('https://api.webflow.com/collections/64b6d108c9c1a624e6ee2340/items?live=false', options)
+            .then(response => response.json())
+            .then(response => console.log(response))
+            .catch(err => console.error(err));
+    })
 
     return(
         <main>
