@@ -3,10 +3,10 @@ import exp from "constants";
 const Airtable = require('airtable');
 
 const base = new Airtable({
-    apiKey: process.env.AIRTABLE_API_KEY,
-}).base(process.env.AIRTABLE_BASE_ID);
+    apiKey: 'patEx17jm7cJGRM3n.f10a8a9dbfb25a6dc18caeb854badf730e9d6f99d7cafd6170e072c153180f26',
+}).base('appuI8SbKMtCgPOZK');
 
-const table = base(process.env.AIRTABLE_TABLE_NAME);
+const table = base('Table 1');
 
 // maps over the records, calling minifyRecord, giving us required data
 const getMinifiedRecords = records => {
@@ -32,7 +32,7 @@ export default async function getPosts() {
             headers: {
                 accept: 'application/json',
                 'content-type': 'application/json',
-                authorization: process.env.WEBFLOW_API_KYE
+                authorization: 'Bearer bcfb85f417dc77b2503ef1557928fd162c5d655f3949fb3402333337b5281de2'
             },
             body: JSON.stringify({
                 fields: {
