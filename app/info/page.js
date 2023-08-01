@@ -43,13 +43,13 @@ export default async function getPosts() {
                     phonnumber: post.fields.PhoneNumber,
                     'email-2': post.fields.Email,
                     company: post.fields.Company,
-                    service: post.fields.Servise,
+                    service: post.fields.Servises,
                     budget: post.fields.budget
                 }
             })
         };
 
-        fetch('https://api.webflow.com/collections/64b6d108c9c1a624e6ee2340/items?live=false', options)
+        fetch('https://api.webflow.com/collections/64b6ebc7ae6521a1547f1d81/items?live=false', options)
             .then(response => response.json())
             .then(response => console.log(response))
             .catch(err => console.error(err));
@@ -66,7 +66,7 @@ export default async function getPosts() {
                         <span>{post.fields.budget}</span>
                         <span>{post.fields.Email}</span>
                         <span>{post.fields.PhoneNumber}</span>
-                        <span>{post.fields.Servise}</span>
+                        <span>{post.fields.Servises}</span>
                     </li>
                 ))}
             </ul>
