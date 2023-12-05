@@ -6,6 +6,7 @@ const nextConfig = {
         AIRTABLE_TABLE_NAME: process.env.AIRTABLE_TABLE_NAME,
     },
     reactStrictMode: true,
+    swcMinify: false,
 }
 
 module.exports = nextConfig
